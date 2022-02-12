@@ -1,0 +1,23 @@
+package prog6_1;
+
+import javax.swing.JFrame;
+
+import sun.jvm.hotspot.runtime.StaticBaseConstructor;
+
+
+public class MyFrame extends JFrame{
+	public MyFrame() {
+		setTitle("Address Form");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(500, 1000);
+		setLocationRelativeTo(null);
+		setVisible(true);
+	}
+	
+	
+		public static void main(String[] args) {
+			MyFrame myFrame=new MyFrame();
+		}
+		
+
+}

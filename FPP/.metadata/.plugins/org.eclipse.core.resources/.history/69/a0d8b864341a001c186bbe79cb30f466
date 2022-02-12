@@ -1,0 +1,13 @@
+package prog12_1.closedcurve.good;
+
+public class IllegalClosedCurveException extends Exception {
+
+	public IllegalClosedCurveException() {
+		super();
+	}
+
+	public IllegalClosedCurveException(String mssgae) {
+		super(mssgae);
+	}
+
+}

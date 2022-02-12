@@ -1,0 +1,47 @@
+package Recurrsion;
+
+import java.util.Arrays;
+import java.util.List;
+
+
+public class BinarySearch {
+	public static void main(String[] args) {
+		/*
+		int search =40;
+		int[] arr= {10,5,30,23,40,89};
+		Arrays.sort(arr);
+		System.out.println(Arrays.toString(arr));
+	    int mid=0;
+	    int start=0;
+	    int end=arr.length-1;
+	    while(start<end) {
+	    	mid=start+(end-start)/2;
+	    	if(arr[mid]==search) {
+	    		System.out.println(search+" is found at position at "+mid);
+	    		break;
+	    	}
+	    	if(arr[mid]<search) {
+	    		start=mid+1;
+	    	}else {
+	    		end=mid-1;
+	    	}
+	    }
+	    */
+		
+	}
+	
+	public static boolean  recurseBinarySearch(String[] strArr,int start,int last,String finder) {
+		int mid=(start+last)/2;
+		if(start>last) {
+			return false;
+		}
+		if(strArr[mid].equals(finder)) {
+			return true;
+		}
+		else if(strArr[mid].compareTo(finder)>0) {
+			return recurseBinarySearch(strArr,0,mid-1,finder);
+		}else if(strArr[mid].compareTo(finder)<0) {
+			return recurseBinarySearch(strArr,mid+1,last,finder);
+		}
+	}
+}

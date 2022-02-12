@@ -1,0 +1,13 @@
+package prog12_1.closedcurve.good;
+
+public class IllegalRectangleException extends IllegalClosedCurveException{
+	
+	public IllegalRectangleException() {
+		super();
+	}
+
+	public IllegalRectangleException(String msg) {
+		super(msg);
+	}
+
+}

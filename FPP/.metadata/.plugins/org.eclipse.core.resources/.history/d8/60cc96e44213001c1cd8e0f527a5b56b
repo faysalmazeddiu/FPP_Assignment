@@ -1,0 +1,15 @@
+package prog6_1;
+
+import javax.swing.JFrame;
+
+public class MyFrame extends JFrame{
+	public MyFrame() {
+		setTitle("Address Form");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setSize(500, 1000);
+	}
+	
+	public static void main() {
+		
+	}
+}

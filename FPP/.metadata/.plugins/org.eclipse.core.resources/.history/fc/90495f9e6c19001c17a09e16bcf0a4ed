@@ -1,0 +1,47 @@
+package Recurrsion;
+
+import java.util.Arrays;
+
+public class Lab_7_2 {
+	public static void main(String[] args) {
+		Lab_7_2 obj=new Lab_7_2("zwxuabfkafutbbbb");
+		minSort(0);
+		System.out.println(Arrays.toString(obj.cArr));
+	}
+	char[] cArr;
+	Lab_7_2(String str){
+		cArr=str.toCharArray();
+	}
+	
+	public void minSort(int index) {
+		char minChar=cArr[index];
+		if(index==cArr.length) {
+			return;
+		}
+		else {
+			if(minChar<cArr[index+1]) {
+				swap(index, index+1);
+			}
+			minSort(index+1);
+		}
+	}
+	
+	
+	
+	public int minPos(int i) {
+		int min=i;
+		char minChar=cArr[i];
+		for(int j=i+1;j<cArr.length;++j) {
+			if(minChar>cArr[j]) {
+				min=j;
+			}
+		}
+		return min;
+	}
+	
+	public void swap(int pos,int minPos) {
+		char tempChar=cArr[pos];
+		cArr[pos]=cArr[minPos];
+		cArr[minPos]=tempChar;
+	}
+}

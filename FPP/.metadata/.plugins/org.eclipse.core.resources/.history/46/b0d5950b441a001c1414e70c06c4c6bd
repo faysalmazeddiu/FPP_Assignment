@@ -1,0 +1,13 @@
+package prog12_1.closedcurve.good;
+
+public class IllegalCircleException extends IllegalClosedCurveException{
+	
+	public IllegalCircleException() {
+		super();
+	}
+
+	public IllegalCircleException(String errMessage) {
+		super(errMessage);
+	}
+
+}

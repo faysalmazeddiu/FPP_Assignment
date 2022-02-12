@@ -1,0 +1,33 @@
+Question 1:
+
+
+Answer :  
+		(d) StackOverFlowError
+	
+	    Explain : 
+	    
+	    Base condition is checking that the string is null or not. since, we are passing 
+	    a string into recurse method, so it will not meet the base condition. recurse method will 
+	    be continued.
+	    
+
+
+Question 2:	    
+	    
+Answer :
+		(d) StackOverFlowError
+		
+	     Explain :
+	     
+	     the reason of StackOverFlowError for question-2  is the base condition. string will not be null. so,
+	     it will continuously invoke the recurse method.
+	     
+	     
+	     
+Question-3:
+
+Answer :
+		Cloneable was implemented by both  Enclosing and Inner class. whenever innerMethod() of 
+		Inner class is called , that time object of inner class makes a clone. it's mean inner
+		class makes a similar copy in the memory.
+	     

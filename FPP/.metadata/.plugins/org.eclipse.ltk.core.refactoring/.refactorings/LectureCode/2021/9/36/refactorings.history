@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;BlankFinal.java&apos; to &apos;MyPractice/src/finalpractice&apos;&#x0A;- Original project: &apos;LectureCode&apos;&#x0A;- Destination element: &apos;MyPractice/src/finalpractice&apos;&#x0A;- Original element: &apos;lesson3.blankfinal.BlankFinal.java&apos;" description="Copy compilation unit" destination="=MyPractice/src&lt;finalpractice" element1="/src&lt;lesson3.blankfinal{BlankFinal.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1630796007284" units="1" version="1.0"/>
+</session>

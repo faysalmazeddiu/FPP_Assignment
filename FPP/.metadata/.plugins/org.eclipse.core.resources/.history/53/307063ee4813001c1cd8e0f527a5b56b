@@ -1,0 +1,31 @@
+package prog6_1;
+
+import java.awt.Font;
+
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+public class MyFrame extends JFrame{
+	JLabel lable=new JLabel();
+	
+	public MyFrame() {
+		setTitle("Address Form");
+		setVisible(true);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		//setLocation(200,0);
+		//setSize(1000, 500);
+		//setLocationRelativeTo(null);
+		setBounds(200,0,1000,500);
+		lable.setText("Name");
+		Font font =new Font("Aril",Font.PLAIN,40);
+		lable.setFont(font);
+		add(lable);
+		
+	}
+	
+	
+		public static void main(String[] args) {
+			MyFrame myFrame=new MyFrame();
+		}
+		
+
+}

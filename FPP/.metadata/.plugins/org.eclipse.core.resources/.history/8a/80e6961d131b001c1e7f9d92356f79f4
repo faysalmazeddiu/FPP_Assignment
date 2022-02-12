@@ -1,0 +1,11 @@
+package assignments.assignments_13.assignment_13_2;
+
+public class Pair<Person, Address> {
+    public final Person person;
+    public final Address address;
+
+    public Pair(Person p, Address a) {
+        this.person = p;
+        this.address = a;
+    }
+}

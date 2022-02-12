@@ -1,0 +1,57 @@
+package StackAndQueue;
+
+public class StackWithLinkedList {
+	
+	public static void main(String[] args) {
+		
+	}
+	Node headerNode;
+	 public void push() {
+		 Node newNode=new Node('c');
+		 if(headerNode.nextNode !=null) {
+			 //headerNode.nextNode.prevNode=newNode;
+			 newNode.prevNode=headerNode;
+			 newNode.nextNode=headerNode.nextNode;
+		 }
+		 headerNode.nextNode=newNode;
+		 System.out.println("Data inserted into stack");
+	 }
+	 
+	 public void pop() {
+		 if(headerNode.nextNode !=null) {
+			 headerNode.nextNode=headerNode.nextNode.nextNode;
+			 headerNode.nextNode.nextNode.prevNode=headerNode;
+			 System.out.println(headerNode.nextNode.charecter+" is removed from stack");
+		 }else {
+			 System.out.println("Sorry Stack is Empty");
+		 }
+		 
+	 }
+	 
+	 public void peek() {
+		 if(headerNode.nextNode !=null) {
+			 System.out.println(headerNode.nextNode.charecter+" is removed from stack");
+		 }else {
+			 System.out.println("Sorry Stack is Empty");
+		 }
+	 }
+	 
+	 public String toString() {
+		
+		 if(headerNode.nextNode==null) {return "Stack is empty";}
+		 Node currentNode=headerNode.nextNode;
+		 while( currentNode.nextNode != null) {
+			 System.out.println(currentNode.charecter);
+		 }
+		 return "";
+	 }
+}
+
+class Node{
+	char charecter;
+	Node nextNode;
+	Node prevNode;
+	public Node(char  ch) {
+		this.charecter=ch;
+	}
+}

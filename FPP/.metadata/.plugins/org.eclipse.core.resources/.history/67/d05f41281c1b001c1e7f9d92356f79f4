@@ -1,0 +1,153 @@
+package prog13_2;
+
+
+import java.sql.*;
+import java.util.logging.Logger;
+
+public class InsertAndDeletePerson {
+    private String selectPersion = "select * from person where id=?";
+    private String selectAddress = "select * from address where personId=?";
+    private String insertPersion = "insert into person(firstname, lastname,ssn) values(?,?,?)";
+    private String insertAddress = "insert into address(personid, street, city, state, zip) values(?,?,?,?,?)";
+
+    private String updatePersion = "update person set firstname=?, lastname=?, ssn=? WHERE id=?";
+    private String updateAddress = "update address set street=?, city=?, state=?, zip=? WHERE personID=?";
+    private static final Logger LOG = Logger.getLogger(ReadPerson.class.getName());
+
+    public void insertPersion(Person person, Address address) throws SQLException {
+        Connection conn = null;
+        String id = "";
+        try {
+            conn = ConnectManager.getConnection();
+            PreparedStatement stat = conn.prepareStatement(insertPersion);
+            stat.setString(1, person.getFirstName());
+            stat.setString(2, person.getLastName());
+            stat.setString(3, person.getSsn());
+            stat.execute();
+            ResultSet rs = stat.getGeneratedKeys();
+
+            if (rs.next()) {
+                id = rs.getString(1);
+                System.out.println("PersonID:" + id);
+            }
+
+            //System.out.println(id);
+
+            stat.clearParameters();
+            stat = conn.prepareStatement(insertAddress, Statement.RETURN_GENERATED_KEYS);
+            stat.setInt(1, Integer.parseInt(id));
+            stat.setString(2, address.getStreet());
+            stat.setString(3, address.getCity());
+            stat.setString(4, address.getState());
+            stat.setString(5, address.getZip());
+            stat.execute();
+            rs = stat.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getString(1);
+                System.out.println("AddressID:" + id);
+            }
+        } catch (SQLException e) {
+            //log exception
+            LOG.warning("SQLException thrown:\n" + e.getMessage());
+            throw e;
+        } finally {
+            //close connection
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    LOG.warning("SQLException thrown when trying to close Connection:\n" + e.getMessage());
+                }
+            }
+        }
+
+    }
+
+    public void updatePersion(Person person, Address address) throws SQLException {
+        Connection conn = null;
+        String id = "";
+        try {
+            conn = ConnectManager.getConnection();
+            PreparedStatement stat = conn.prepareStatement(updatePersion);
+            stat.setString(1, person.getFirstName());
+            stat.setString(2, person.getLastName());
+            stat.setString(3, person.getSsn());
+            stat.setInt(4, Integer.parseInt(person.getId()));
+            int rowEffected = stat.executeUpdate();
+
+            System.out.println("Person row effected " + rowEffected);
+
+            //System.out.println(id);
+
+            stat.clearParameters();
+            stat = conn.prepareStatement(updateAddress);
+            stat.setString(1, address.getStreet());
+            stat.setString(2, address.getCity());
+            stat.setString(3, address.getState());
+            stat.setString(4, address.getZip());
+            stat.setInt(5, Integer.parseInt(person.getId()));
+            rowEffected = stat.executeUpdate();
+            System.out.println("Address row effected " + rowEffected);
+
+        } catch (SQLException e) {
+            //log exception
+            LOG.warning("SQLException thrown:\n" + e.getMessage());
+            throw e;
+        } finally {
+            //close connection
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    LOG.warning("SQLException thrown when trying to close Connection:\n" + e.getMessage());
+                }
+            }
+        }
+    }
+
+    public Pair FindPerson(String id) throws SQLException {
+        Pair pair;
+        Connection conn = null;
+        try {
+            int personId = 0;
+            conn = ConnectManager.getConnection();
+            PreparedStatement stat = conn.prepareStatement(selectPersion);
+            stat.setInt(1, Integer.parseInt(id));
+
+            ResultSet rs = stat.executeQuery();
+            Person person = null;
+            Address address = null;
+            if (rs.next()) {
+                personId = Integer.parseInt(rs.getString("id"));
+                person = new Person(rs.getString("id"), rs.getString("firstname"), rs.getString("lastname"), rs.getString("ssn"));
+            }
+
+            if (0 < personId) {
+                stat.clearParameters();
+                stat = conn.prepareStatement(selectAddress);
+                stat.setInt(1, personId);
+                rs = stat.executeQuery();
+                if (rs.next())
+                    address = new Address(rs.getString("id"), rs.getString("street"), rs.getString("city"), rs.getString("state"), rs.getString("zip"));
+            }
+
+            pair = new Pair(person, address);
+
+        } catch (SQLException e) {
+            //log exception
+            LOG.warning("SQLException thrown:\n" + e.getMessage());
+            throw e;
+        } finally {
+            //close connection
+            if (conn != null) {
+                try {
+                    conn.close();
+                } catch (SQLException e) {
+                    LOG.warning("SQLException thrown when trying to close Connection:\n" + e.getMessage());
+                }
+            }
+        }
+
+        return pair;
+    }
+}

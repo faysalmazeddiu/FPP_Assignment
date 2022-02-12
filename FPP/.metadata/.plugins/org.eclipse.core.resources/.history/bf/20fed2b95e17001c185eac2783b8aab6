@@ -1,0 +1,47 @@
+package LinkedList;
+
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+
+public class ListPractice {
+	public static void main(String[] args) {
+		Employee e1=new Employee("Mazed",112);
+		Employee e2=new Employee("Mazed",113);
+		Employee e3=new Employee("Mazed",114);
+		List<Employee> list=new LinkedList<>();
+		list.add(e1);
+		list.add(e2);
+		list.add(e3);
+		// for loop
+		for(int i=0;i<list.size();++i) {
+			System.out.println(list.get(i).toString());
+		}
+		
+		// foreach loop
+		for(Employee e:list) {
+			System.out.println(e.toString());
+		}
+		
+		Iterator<Employee> emIterator=list.iterator();
+		while(emIterator.hasNext()) {
+		  System.out.println(emIterator.next().toString());
+		}
+		
+	}
+}
+
+class Employee{
+	String nameString;
+	int Age;
+	public Employee(String name,int age) {
+		// TODO Auto-generated constructor stub
+		this.nameString=name;
+		this.Age=age;
+	}
+	
+	@Override
+	public String toString() {
+		return nameString+"==="+Age;
+	}
+}

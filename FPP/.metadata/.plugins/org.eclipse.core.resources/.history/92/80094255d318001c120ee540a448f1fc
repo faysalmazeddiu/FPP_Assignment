@@ -1,0 +1,88 @@
+package prog7_3;
+
+import java.util.LinkedList;
+
+/**
+ * Recursively merges two sorted linked lists
+ *
+ */
+public class Merge {
+	public LinkedList<Integer> merge(LinkedList<Integer> list1, LinkedList<Integer> list2) {
+		if (list1 == null && list2 == null) {
+			return null;
+		}
+		int firstSize = list1.size(), secondSize = list2.size();
+		if (list1 == null || list1.size() < 1) {
+			return list2;
+		}
+		if (list2 == null || list2.size() < 1) {
+			return list1;
+		}
+
+		LinkedList<Integer> merList = new LinkedList<>();
+		int l = 0, m = 0;
+		while (merList.size() < firstSize + secondSize) {
+			int value1 = Integer.MAX_VALUE, value2 = Integer.MAX_VALUE;
+			if (l < firstSize) {
+				value1 = list1.get(l);
+			}
+			if (m < secondSize) {
+				value2 = list2.get(m);
+			}
+			if (value1 < value2) {
+				merList.add(value1);
+				l++;
+			} else {
+				merList.add(value2);
+				m++;
+			}
+			System.out.printf("i= %d, j= %d, list1 =%d, list2 = %d \n", l, m, firstSize, secondSize);
+			System.out.println(merList);
+		}
+
+		return merList;
+	}
+
+	public LinkedList<Integer> recurse(LinkedList<Integer> listObj, LinkedList<Integer> listObj2) {
+		LinkedList<Integer> list3 = new LinkedList<>();
+		if ((listObj == null && listObj2 == null) || (listObj.isEmpty() && listObj2.isEmpty()))
+			return list3;
+
+		if (listObj2.isEmpty()) {
+			list3.addAll(listObj);
+			return list3;
+		}
+		if (listObj.isEmpty()) {
+			list3.addAll(listObj2);
+			return list3;
+		}
+
+		int first1 = listObj.peek();
+		int first2 = listObj2.peek();
+
+		if (first1 < first2)
+			list3.add(listObj.pop());
+		else if (first2 < first1)
+			list3.add(listObj2.pop());
+		list3.addAll(recurse(listObj, listObj2));
+		return list3;
+	}
+
+	// test your code
+	public static void main(String[] args) {
+		LinkedList<Integer> list1 = new LinkedList<>();
+		LinkedList<Integer> list2 = new LinkedList<>();
+		list1.add(4);
+		list1.add(5);
+		list1.add(21);
+		list1.add(25);
+		list2.add(2);
+		list2.add(9);
+		list2.add(17);
+		Merge m = new Merge();
+		LinkedList<Integer> list3 = m.recurse(list1, list2);
+		if (list3 != null)
+			System.out.println(list3);
+
+	}
+}

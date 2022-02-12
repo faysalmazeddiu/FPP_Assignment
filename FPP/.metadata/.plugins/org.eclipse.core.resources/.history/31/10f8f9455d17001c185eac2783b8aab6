@@ -1,0 +1,20 @@
+package LinkedList;
+
+public class ListPractice {
+
+}
+
+class Employee{
+	String nameString;
+	int Age;
+	public Employee(String name,int age) {
+		// TODO Auto-generated constructor stub
+		this.nameString=name;
+		this.Age=age;
+	}
+	
+	@Override
+	public String toString() {
+		return nameString+"==="+Age;
+	}
+}

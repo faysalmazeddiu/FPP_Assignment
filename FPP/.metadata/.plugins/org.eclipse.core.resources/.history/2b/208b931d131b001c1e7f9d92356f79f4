@@ -1,0 +1,299 @@
+package assignments.assignments_13.assignment_13_2;
+
+
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class AddressForm extends JFrame {
+    private JPanel topPanel;
+    private JPanel bottomPanel;
+    private JPanel addressPanel;
+    private JPanel errorPanel;
+    private JButton btnSearch;
+    private JButton btnSave;
+    private JButton btnClear;
+    private JTextField idField;
+    private JTextField firstNameField;
+    private JTextField lastNameField;
+    private JTextField ssnField;
+
+
+    private JTextField streetField;
+    private JTextField cityField;
+    private JTextField stateField;
+    private JTextField zipField;
+
+    private JLabel txtError;
+    private static final long serialVersionUID = 1L;
+    private InsertAndDeletePerson db;
+
+    public AddressForm() {
+        initializeWindow();
+        JPanel mainPanel = new JPanel();
+        JPanel centerPanel = new JPanel();
+        defineTopPanel();
+        //Center Panel
+        defineMiddlePanel();
+        defineErrorPanel();
+        centerPanel.add(addressPanel, BorderLayout.NORTH);
+        centerPanel.add(errorPanel, BorderLayout.WEST);
+        //Bottom Panel
+        defineBottomPanel();
+        mainPanel.setLayout(new BorderLayout());
+        mainPanel.add(topPanel, BorderLayout.NORTH);
+        mainPanel.add(centerPanel, BorderLayout.CENTER);
+        mainPanel.add(bottomPanel, BorderLayout.SOUTH);
+        getContentPane().add(mainPanel);
+    }
+
+    private void defineTopPanel() {
+        topPanel = new JPanel();
+        JLabel labelID = new JLabel("ID");
+        labelID.setFont(makeSmallFont(labelID.getFont()));
+        idField = new JTextField(12);
+        JPanel idPanel = createTextPanel(labelID, idField);
+
+        JLabel labelFirstName = new JLabel("First Name");
+        labelFirstName.setFont(makeSmallFont(labelFirstName.getFont()));
+        firstNameField = new JTextField(12);
+        JPanel firstNamePanel = createTextPanel(labelFirstName, firstNameField);
+
+        JLabel labelLastName = new JLabel("Last Name");
+        labelLastName.setFont(makeSmallFont(labelLastName.getFont()));
+        lastNameField = new JTextField(12);
+        JPanel lastNamePanel = createTextPanel(labelLastName, lastNameField);
+
+        JLabel labelSSN = new JLabel("SSN");
+        labelSSN.setFont(makeSmallFont(labelSSN.getFont()));
+        ssnField = new JTextField(12);
+        JPanel ssnPanel = createTextPanel(labelSSN, ssnField);
+
+        topPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        topPanel.add(idPanel);
+        topPanel.add(firstNamePanel);
+        topPanel.add(lastNamePanel);
+        topPanel.add(ssnPanel);
+
+    }
+
+    private void defineMiddlePanel() {
+        // implement
+        addressPanel = new JPanel();
+
+        JLabel labelStreet = new JLabel("Street");
+        labelStreet.setFont(makeSmallFont(labelStreet.getFont()));
+        streetField = new JTextField(12);
+        JPanel streetPanel = createTextPanel(labelStreet, streetField);
+
+        JLabel labelCity = new JLabel("City");
+        labelCity.setFont(makeSmallFont(labelCity.getFont()));
+        cityField = new JTextField(12);
+        JPanel cityPanel = createTextPanel(labelCity, cityField);
+
+        JLabel labelState = new JLabel("State");
+        labelState.setFont(makeSmallFont(labelState.getFont()));
+        stateField = new JTextField(12);
+        JPanel statePanel = createTextPanel(labelState, stateField);
+
+        JLabel labelZip = new JLabel("Zip");
+        labelZip.setFont(makeSmallFont(labelZip.getFont()));
+        zipField = new JTextField(12);
+        JPanel zipPanel = createTextPanel(labelZip, zipField);
+
+        addressPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+        addressPanel.add(streetPanel);
+        addressPanel.add(cityPanel);
+        addressPanel.add(statePanel);
+        addressPanel.add(zipPanel);
+
+    }
+
+    private void defineBottomPanel() {
+        bottomPanel = new JPanel();
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        //Button
+        btnSearch = new JButton("Search");
+        btnSearch.addActionListener(new SearchClickListener());
+
+        btnSave = new JButton("Save");
+        btnSave.addActionListener(new SaveClickListener());
+
+        btnClear = new JButton("Clear");
+        btnClear.addActionListener(new ClearClickListener());
+
+        bottomPanel.add(btnSearch);
+        bottomPanel.add(btnSave);
+        bottomPanel.add(btnClear);
+
+    }
+
+    private void defineErrorPanel() {
+        errorPanel = new JPanel();
+        errorPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
+
+        //OUTPUT
+        txtError = new JLabel();
+        txtError.setFont(new Font("SansSerif", Font.PLAIN, 16));
+        txtError.setForeground(Color.RED);
+
+
+        errorPanel.add(txtError);
+
+    }
+
+    private void showErrorMessage(String msg) {
+        txtError.setText(msg);
+    }
+
+    private static JPanel createTextPanel(JLabel lab, JTextField textField) {
+
+        JPanel top = new JPanel();
+        JPanel bottom = new JPanel();
+        top.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
+        bottom.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 0));
+
+        top.add(lab);
+        bottom.add(textField);
+
+        JPanel textPanel = new JPanel();
+        textPanel.setLayout(new BorderLayout());
+        textPanel.add(top, BorderLayout.NORTH);
+        textPanel.add(bottom, BorderLayout.CENTER);
+        return textPanel;
+    }
+
+    private void initializeWindow() {
+        db = new InsertAndDeletePerson();
+        setTitle("Address Form");
+        setSize(700, 200);
+        handleWindowClosing();
+        centerFrameOnDesktop(this);
+        setResizable(false);
+    }
+
+    public static Font makeSmallFont(Font f) {
+        return new Font(f.getName(), f.getStyle(), (f.getSize() - 2));
+    }
+
+    private void handleWindowClosing() {
+        addWindowListener(new WindowAdapter() {
+            public void windowClosing(WindowEvent w) {
+                dispose();
+                // other clean-up
+                System.exit(0);
+            }
+        });
+    }
+
+    private void clearFields() {
+        //First  Line
+        idField.setText("");
+        firstNameField.setText("");
+        lastNameField.setText("");
+        ssnField.setText("");
+        //Second  Line
+        streetField.setText("");
+        cityField.setText("");
+        stateField.setText("");
+        zipField.setText("");
+    }
+
+    class SearchClickListener implements ActionListener {
+        public void actionPerformed(ActionEvent evt) {
+            String id = idField.getText();
+            if (id.equals("")) {
+                String output = "To perform address Save, all fields but ID must noneempty.";
+                showErrorMessage(output);
+                clearFields();
+                return;
+            }
+
+            InsertAndDeletePerson db = new InsertAndDeletePerson();
+            try {
+                Pair pair = db.FindPerson(id);
+                Person person = (Person) pair.person;
+                Address address = (Address) pair.address;
+
+                if (null != person) {
+                    showErrorMessage("Record found");
+                    firstNameField.setText(person.getFirstName());
+                    lastNameField.setText(person.getLastName());
+                    ssnField.setText(person.getSsn());
+                } else {
+                    showErrorMessage("No record found");
+                }
+
+                if (null != address) {
+                    streetField.setText(address.getStreet());
+                    cityField.setText(address.getCity());
+                    stateField.setText(address.getState());
+                    zipField.setText(address.getZip());
+                }
+
+            } catch (SQLException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
+
+    class SaveClickListener implements ActionListener {
+        public void actionPerformed(ActionEvent evt) {
+            String ID = idField.getText().trim();
+            Person person = new Person(idField.getText(), firstNameField.getText(), lastNameField.getText(), ssnField.getText());
+            Address address = new Address(streetField.getText(), cityField.getText(), stateField.getText(), zipField.getText());
+            if (ID.equals("")) {
+                try {
+                    db.insertPersion(person, address);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    db.updatePersion(person, address);
+                    showErrorMessage("Database has been updated");
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+    class ClearClickListener implements ActionListener {
+        public void actionPerformed(ActionEvent evt) {
+            clearFields();
+        }
+    }
+
+
+    public static void centerFrameOnDesktop(Component f) {
+        final int SHIFT_AMOUNT = 0;
+        Toolkit toolkit = Toolkit.getDefaultToolkit();
+        int height = toolkit.getScreenSize().height;
+        int width = toolkit.getScreenSize().width;
+        int frameHeight = f.getSize().height;
+        int frameWidth = f.getSize().width;
+        f.setLocation(((width - frameWidth) / 2) - SHIFT_AMOUNT, (height - frameHeight) / 3);
+    }
+
+    public static void main(String[] args) {
+        AddressForm mf = new AddressForm();
+        // mf.pack();
+        mf.setVisible(true);
+    }
+}

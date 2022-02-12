@@ -1,0 +1,26 @@
+package prog13_2;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
+
+public class ConnectManager {
+
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/fppdb";
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "ph!l@delph!@nE@gle";
+
+    public static Connection getConnection() throws SQLException {
+        try {
+            Connection conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+            System.out.println("Got connection...");
+            return conn;
+        } catch (Exception ex) {
+            System.out.println(ex.getMessage());
+
+        }
+        return null;
+    }
+
+}

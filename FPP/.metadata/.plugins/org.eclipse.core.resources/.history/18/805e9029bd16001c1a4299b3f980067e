@@ -1,0 +1,29 @@
+package prog9_1;
+
+public class MyStack {
+	private MyStringLinkedList list;
+	public MyStack() {
+		list = new MyStringLinkedList();
+	}
+	
+	public String pop() {
+		//implement
+		String popValue=peek();
+		if(popValue !=null) {
+			list.remove(0);
+			return popValue;
+		}
+		return null;
+	}
+	public String peek() {
+		//implement
+		return list.get(0);
+	}
+	
+	public void push(String s) {
+		//implement
+		if(!(s.equals("")) || s!=null) {
+			
+		}
+	}
+}

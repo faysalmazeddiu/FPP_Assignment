@@ -1,0 +1,69 @@
+package prog9_2;
+
+public class OwnStack {
+	
+	private static final int LENGTH = 500;
+	private int topper = -1;
+	private int nextVal = 0;
+	private Character [] charecterArray = new Character[LENGTH];
+	
+	public void push(Character chrecter) {
+		if (!checkDelimiters(chrecter)) return;
+		charecterArray[nextVal] = chrecter;
+		topper++;
+		nextVal++;
+	}
+	
+	public Character peek() {
+		return topper == -1 ? '\0' : charecterArray[topper];
+	}
+	
+	public char pop() {
+		Character ch = peek();
+		if (ch != '\0') {
+			charecterArray[topper] = '\0';
+			topper--;
+			nextVal--;
+		}
+		return ch;
+	}
+	
+	boolean isEmpty() {
+		return topper == -1 ? true : false;
+	}
+	
+	
+	void makeEmpty() {
+		topper = -1;
+		nextVal = 0;
+	}
+	
+	boolean checkDelimiters(Character ch) {
+		switch (ch) {
+		case '[':
+		case ']':
+		case '{':
+		case '}':
+		case '<':
+		case '>':
+		case '(':
+		case ')':
+			return true;
+		default:
+			return false;
+		}
+	}
+	
+	@Override
+	public String toString() {
+		if (topper == -1) return "<empty>";
+		StringBuilder stringBuilder = new StringBuilder();
+		for (Character value : charecterArray) {
+			if (value != null) {
+				stringBuilder.append(value.toString()+" ");
+			}
+		}
+		return stringBuilder.toString();
+	}
+
+}

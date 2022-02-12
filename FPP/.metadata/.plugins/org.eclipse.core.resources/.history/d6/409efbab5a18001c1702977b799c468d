@@ -1,0 +1,27 @@
+package sortroutines;
+
+import java.util.Arrays;
+
+import runtime.Sorter;
+
+public class BSTSort extends Sorter {
+
+	private MyBST bst;
+	public BSTSort() {
+		bst = new MyBST();
+	}
+	
+
+	@Override
+	public int[] sort(int[] arr) {
+		bst.insertAll(arr);
+		return bst.readIntoArray();
+	}
+	
+	public static void main(String[] args) {
+		int[] test = {21,13,1,-22, 51, 5, 18};
+		BSTSort bs = new BSTSort();
+		System.out.println(Arrays.toString(bs.sort(test)));
+	}
+
+}

@@ -1,0 +1,79 @@
+package prog7_3;
+
+import java.util.LinkedList;
+
+/**
+ * Recursively merges two sorted linked lists
+ *
+ */
+public class Merge {
+	public LinkedList<Integer> merge(LinkedList<Integer> list1, LinkedList<Integer> list2) {
+		if(list1==null && list2==null) {
+			return null;
+		}
+		int size1 = list1.size(), size2 = list2.size();
+		if(list1==null || list1.size()<1) {
+			return list2;
+		} 
+		if (list2==null || list2.size()<1) {
+			return list1;
+		}
+		
+		LinkedList<Integer> merList = new LinkedList<>();
+		int l=0, m=0; 
+		while(merList.size()<size1+size2) {
+			int value1=Integer.MAX_VALUE, 
+			value2=Integer.MAX_VALUE;
+			if(l<size1) {
+				value1= list1.get(l);}
+			if(m<size2) {
+				value2= list2.get(m);}
+			if(value1<value2) {
+				merList.add(value1);
+				l++;
+			} else {
+				merList.add(value2);
+				m++;
+			}
+			System.out.printf("i= %d, j= %d, list1 =%d, list2 = %d \n",l,m,size1,size2);
+			System.out.println(merList);
+		}
+		
+		return merList;
+	}
+
+	public LinkedList<Integer> recurse(LinkedList<Integer> list1, LinkedList<Integer> list2) {
+		LinkedList<Integer> list3 = new LinkedList<>();
+		if((list1==null && list2==null) || (list1.isEmpty() && list2.isEmpty()))
+			return list3;
+
+		if(list2.isEmpty()) {
+			list3.addAll(list1);
+			return list3;
+		}
+		if(list1.isEmpty()) {
+			list3.addAll(list2);
+			return list3;
+		}
+		
+		int first1 = list1.peek();
+		int first2 = list2.peek();
+
+		if(first1 < first2) list3.add(list1.pop());
+		else if(first2 < first1) list3.add(list2.pop());
+		list3.addAll(recurse(list1, list2));
+		return list3;
+	}
+	
+	//test your code
+	public static void main(String[] args) {
+		LinkedList<Integer> list1 = new LinkedList<>();
+		LinkedList<Integer> list2 = new LinkedList<>();
+		list1.add(4);list1.add(5);list1.add(21);list1.add(25);
+		list2.add(2);list2.add(9);list2.add(17);
+		Merge m = new Merge();
+		LinkedList<Integer> list3 = m.recurse(list1, list2);
+		if(list3 != null) System.out.println(list3);
+		
+	}
+}

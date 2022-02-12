@@ -1,0 +1,57 @@
+package StackAndQueue;
+
+public class QueueWithArray {
+	String[] strArr;
+	int size;
+	int front;
+	int rare;
+	public static void main(String[] args) {
+		QueueWithArray  queueWithArray=new QueueWithArray();
+		queueWithArray.enQueue("Mazed");
+		queueWithArray.enQueue("Sazed");
+		queueWithArray.enQueue("Rimon Mostafiz");
+		queueWithArray.enQueue("Hellaly vai");
+		queueWithArray.enQueue("Rasel Vai");
+		System.out.println();
+	}
+	QueueWithArray(){
+		strArr=new String[5];
+		front=0;
+		size=0;
+		rare=-1;
+	}
+	
+	public void enQueue(String data) {
+		++rare;
+		if(rare==strArr.length && front>0) {
+			rare=-1;
+		}
+		if(size==strArr.length) {
+			System.out.println("Queue is full");
+		}
+		
+		strArr[rare]=data;
+		++size;
+	}
+	
+	public void deQueue() {
+		//String peekValString=peek();
+		if(front==strArr.length && rare>=0) {
+			front=0;
+		}
+		if(size==0) {
+			System.out.println("Queue is empty");
+			return;
+		}
+		else {
+			strArr[front]=null;
+			++front;
+			--size;
+		}
+		
+	}
+	
+	public String peek() {
+		return strArr[front];
+	}
+}

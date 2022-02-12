@@ -1,0 +1,14 @@
+package Recurrsion;
+
+public class Power {
+	public static void main(String[] args) {
+		
+	}
+	
+	public double power(double x,int n) {
+		if(n==1) {
+			return x;
+		}
+		return x*power(x, n-1)
+	}
+}

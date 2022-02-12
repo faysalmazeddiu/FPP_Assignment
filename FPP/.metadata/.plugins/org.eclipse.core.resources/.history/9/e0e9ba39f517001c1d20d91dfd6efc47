@@ -1,0 +1,35 @@
+package StackAndQueue;
+
+public class StackWithLinkedList {
+	Node headerNode;
+	 public void push() {
+		 Node newNode=new Node('c');
+		 if(headerNode.nextNode !=null) {
+			 //headerNode.nextNode.prevNode=newNode;
+			 newNode.prevNode=headerNode;
+			 newNode.nextNode=headerNode.nextNode;
+		 }
+		 headerNode.nextNode=newNode;
+		 System.out.println("Data inserted into stack");
+	 }
+	 
+	 public void pop() {
+		 if(headerNode.nextNode !=null) {
+			 headerNode.nextNode=headerNode.nextNode.nextNode;
+			 headerNode.nextNode.nextNode.prevNode=headerNode;
+			 System.out.println("Data removed from stack");
+		 }else {
+			 System.out.println("Sorry Stack is Empty");
+		 }
+		 
+	 }
+}
+
+class Node{
+	char charecter;
+	Node nextNode;
+	Node prevNode;
+	public Node(char  ch) {
+		this.charecter=ch;
+	}
+}

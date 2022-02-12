@@ -1,0 +1,16 @@
+package Recurrsion;
+
+public class Lab_7_2 {
+	public static void main(String[] args) {
+		
+	}
+	private char[] c;
+	class Lab7_2{
+		c=new char[];
+	}
+	
+	public int minPos(int i) {
+		int min=i;
+		char c=
+	}
+}

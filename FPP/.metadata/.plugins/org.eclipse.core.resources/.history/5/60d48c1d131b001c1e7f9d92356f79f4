@@ -1,0 +1,25 @@
+package assignments.assignments_13.assignment_13_2;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Main {
+
+    public static void main(String[] args) {
+        try {
+            Connection con = ConnectManager.getConnection();
+            String sql = "SELECT * from person";
+            PreparedStatement stat = con.prepareStatement(sql);
+            ResultSet rs = stat.executeQuery();
+            if (rs.next()) {
+                System.out.println(rs.getString(2));
+            }
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+}

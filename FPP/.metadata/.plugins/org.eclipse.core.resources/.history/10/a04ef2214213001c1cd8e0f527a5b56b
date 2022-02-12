@@ -1,0 +1,11 @@
+package prog6_1;
+
+import javax.swing.JFrame;
+
+public class MyFrame extends JFrame{
+	@Override
+	public void setVisible(boolean b) {
+		// TODO Auto-generated method stub
+		super.setVisible(b);
+	}
+}

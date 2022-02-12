@@ -1,0 +1,13 @@
+package prog12_1;
+
+public class IllegalSquareException extends IllegalClosedCurveException{
+	
+	public IllegalSquareException() {
+		super();
+	}
+
+	public IllegalSquareException(String msg) {
+		super(msg);
+	}
+
+}

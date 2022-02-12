@@ -1,0 +1,62 @@
+
+Question:1  
+
+		Answer :  String socialSecurityStatus=(age>65)?"eligible":"ineligible";
+
+Question:2
+  
+     String s = "a friendly face";
+
+     (a)  s.charAt(2)
+     
+           Answer : f
+           
+     (b)  s.length()
+     
+           Answer : 15
+
+     (c)  s.substring(2,9)
+     
+			  Answer : friendl
+			  
+			s.substring(4) 
+			
+			  Answer : iendly face
+
+Question:3
+ 
+		     (a) Answer : double A=3.1416*r*r;
+		     (b) Answer : double diag=Math.sqrt((len*len)+(wid*wid));
+     
+Question:4
+
+     (a) 3 * 5 / 9 %2 
+     
+         Answer : 1
+         
+     (b) 4 ^ 3 & 5 
+     
+         Answer : 5
+         
+     (c) 13 >> 2 << 2 ^ 4
+     
+          Answer : 8
+          
+     (d) 32 | 16/3 >> 2 & 5
+     
+          Answer : 33
+          
+    
+      
+  Question:5
+  
+            int a = (b = 5);
+            
+            Answer :
+             
+            yes , the statement is legal. it will compile perfectly.the value of variable "a" will be 5.
+            because statement will be executed by right to left. so at first, the value 5 will be assigned in variable "b"
+            then the value of variable "b" will be assigned in variable "a". therefore, if we print the variable "a", the 
+            output will be 5 in console. 
+  
+

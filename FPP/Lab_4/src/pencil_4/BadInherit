@@ -1,0 +1,33 @@
+public class BadInherit extends SuperClass {
+		BadInherit() {
+			System.out.println("In BadInherit");
+		}
+
+		public static void main(String[] args) {
+			new BadInherit();
+		}
+	}
+
+	class SuperClass {
+		SuperClass() {
+			System.out.println("In SuperClass");
+			new BadInherit();
+		}
+	}
+	
+	Answer ::
+	
+	output : In SuperClass 
+	after printing number of time. it will show StackOverflowError error.
+	
+	Explanation :  
+	
+	form my point of view , the output will be "In SuperClass" . it will show in console number of times.
+	because in main method of subclass (BadInherit class), it creates own instance. when it creates
+    own instance , at first it calls it's own constructor. since , subclass (BadInherit class) inherits
+    SuperClass , from subclass constructor it calls it's super class constructor. from the super class
+    constructor, it creates again subclass instance with subclass constructor. actually it is following order
+    of execution rules.
+	
+	
+	

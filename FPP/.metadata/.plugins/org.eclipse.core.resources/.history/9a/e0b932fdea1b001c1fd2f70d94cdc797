@@ -1,0 +1,20 @@
+package ForEach;
+
+import java.util.ArrayList;
+import java.util.List;
+
+
+
+public class ForeachPractice {
+	public static void main(String[] args) 
+	{
+		List<List<Integer>> listOfLists = new ArrayList<>();
+		List<Integer> innerList = new ArrayList<>();
+		innerList.add(1);
+        innerList.add(2);
+        innerList.add(3);
+        listOfLists.add(innerList);
+        listOfLists.forEach(list-> list.forEach(x-> System.out.println(x)));
+	}
+	
+}

@@ -1,0 +1,11 @@
+
+Answer :
+
+I selected option-(ii) for Situation -A, because local inner class is used for single purpose 
+
+I selected option-(iii) for Situation-B, because anonymous inner class is used only one time, which will not be referred 
+		     referred to again.
+
+I selected option-(i) for Situation-C,  because  member inner class was used for various reasons .this inner class can be 
+ accessed and repeatedly invoked in a loop.   
+	
